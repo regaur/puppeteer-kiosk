@@ -1,2 +1,26 @@
+#echo -e "export DBUS_SESSION_BUS_ADDRESS=${DBUS_SESSION_BUS_ADDRESS}\nexport DISPLAY=$DISPLAY" > ~auto-login/dbus.env
+
+call_method () {
+  local method="$1"
+  local prefix='/org/freedesktop/compiz'
+  local obj="${prefix}/$2"
+  local dest='org.freedesktop.compiz'
+
+  dbus-send --print-reply --type=method_call --dest="${dest}" "${obj}" "${dest}.${method}" ${3:-}
+}
+
+# This fails when booting the system
+# (it does not fail when restarting X on a "warm" system)
+# It seems to have trouble opening hte display or something
+#bg=/usr/share/plymouth/themes/spinner/background-tile.png
+#compiz ccp dbus obs png regex --bg-image $bg 2>&1 >~auto-login/compiz.log &
+compiz ccp dbus obs regex 2>&1 >~auto-login/compiz.log &
+sleep 1
+#call_method list obs/screen0 2>&1 >~auto-login/answer
+#call_method get obs/screen0/opacity_values >~auto-login/answer
+call_method set obs/screen0/opacity_values 'array:int32:0'
+
+(sleep 20; call_method set obs/screen0/opacity_values 'array:int32:100')&
+
 puppeteer-test
 

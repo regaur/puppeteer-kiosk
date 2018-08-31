@@ -1,8 +1,8 @@
 # Maintainer: Jan Boelsche <jan@lagomorph.de>
 pkgname=puppeteer-kiosk
-pkgver=1.2
+pkgver=1.3
 pkgrel=1
-pkgdesc="Launch puppeteer in auto-login session"
+pkgdesc="Launch compiz and puppeteer in auto-login session"
 arch=('x86_64')
 license=('GPL')
 groups=()
@@ -10,20 +10,25 @@ groups=()
 depends=(
   'puppeteer'
   'lightdm-autologin'
+  'compiz-core'
 )
 
-makedepends=('')
-checkdepends=()
-optdepends=()
-provides=()
-conflicts=()
-replaces=()
+conflicts=(
+  'launch-compiz'
+  'fadein-windows'
+)
 
 source=(
   '50-launch-puppeteer'
+  'Default.ini'
 )
-sha256sums=('877011744a267161a1a461ab4c7d93e3e64551fb8c6abb79340c25bde35db740')
+
+sha256sums=('755d1685dcd03f9a596ebd50a462fca223f4bf2eeae20124c6446eab06c1da16'
+            '7434ad4651f28a7ca90e71d75e479c38cea309a33300ecfeff037a02659ad994')
 
 package () {
-  install -Dm 755 -t "${pkgdir}/home/auto-login/xsession.d" 50-launch-puppeteer
+  home="${pkgdir}/home/auto-login"
+  config_dir="${home}/.config/compiz/compizconfig"
+	install -Dm 644 -t "${config_dir}" 'Default.ini'
+  install -Dm 755 -t "${home}/xsession.d" 50-launch-puppeteer
 }
