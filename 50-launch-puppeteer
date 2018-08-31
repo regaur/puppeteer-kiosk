@@ -1,4 +1,11 @@
-#echo -e "export DBUS_SESSION_BUS_ADDRESS=${DBUS_SESSION_BUS_ADDRESS}\nexport DISPLAY=$DISPLAY" > ~auto-login/dbus.env
+#echo -e "export DBUS_SESSION_BUS_ADDRESS=${DBUS_SESSION_BUS_ADDRESS}\nexport DISPLAY=$DISPLAY\nexport XAUTHORITY=$XAUTHORITY" > /home/auto-login/dbus.env
+#xdpyinfo
+#glxinfo
+
+# See https://unix.stackexchange.com/questions/10121/open-a-window-on-a-remote-x-display-why-cannot-open-display
+# without this, compiz somethimes fails to open the display
+# (MIT-MAGIC-COOKIE-1)
+xhost +si:localuser:auto-login
 
 call_method () {
   local method="$1"
@@ -9,15 +16,13 @@ call_method () {
   dbus-send --print-reply --type=method_call --dest="${dest}" "${obj}" "${dest}.${method}" ${3:-}
 }
 
-# This fails when booting the system
-# (it does not fail when restarting X on a "warm" system)
-# It seems to have trouble opening hte display or something
-#bg=/usr/share/plymouth/themes/spinner/background-tile.png
-#compiz ccp dbus obs png regex --bg-image $bg 2>&1 >~auto-login/compiz.log &
-compiz ccp dbus obs regex 2>&1 >~auto-login/compiz.log &
-sleep 1
+bg=/usr/share/plymouth/arch-logo.png
+compiz dbus obs regex png --bg-image "${bg}" 2>&1 >/home/auto-login/compiz.log &
+sleep 2
+
 #call_method list obs/screen0 2>&1 >~auto-login/answer
 #call_method get obs/screen0/opacity_values >~auto-login/answer
+call_method set obs/screen0/opacity_matches 'array:string:name=chromium-browser.*puppeteer_dev_profile.*'
 call_method set obs/screen0/opacity_values 'array:int32:0'
 
 (sleep 20; call_method set obs/screen0/opacity_values 'array:int32:100')&
