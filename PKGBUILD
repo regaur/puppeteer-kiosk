@@ -9,7 +9,7 @@ groups=()
 
 depends=(
   'puppeteer'
-  'lightdm-autologin'
+  'lightdm-autologin>=2.7'
   'compiz-core'
 )
 
@@ -22,7 +22,6 @@ source=(
   '50-launch-puppeteer'
 )
 
-sha256sums=('09c9712d788117f66217234eb81863cd034b8f1ddb825d88b3a88774abd62ae7')
 
 package () {
   home="${pkgdir}/home/auto-login"

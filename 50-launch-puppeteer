@@ -2,11 +2,6 @@
 #xdpyinfo
 #glxinfo
 
-# See https://unix.stackexchange.com/questions/10121/open-a-window-on-a-remote-x-display-why-cannot-open-display
-# without this, compiz somethimes fails to open the display
-# (MIT-MAGIC-COOKIE-1)
-xhost +si:localuser:auto-login
-
 call_method () {
   local method="$1"
   local prefix='/org/freedesktop/compiz'
