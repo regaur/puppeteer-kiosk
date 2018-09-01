@@ -4,7 +4,7 @@ const opacity = require('../opacity')
 
 const blackBody = "data:text/html;charset=utf-8;base64,PGJvZHkgc3R5bGU9ImJhY2tncm91bmQ6IGJsYWNrOyI+PC9ib2R5Pg=="
 
-const URI = process.argv[1] || 'about:blank'
+const URI = process.argv[2] || 'about:blank'
 
 ;(async () => {
   const args=[
@@ -37,5 +37,5 @@ const URI = process.argv[1] || 'about:blank'
   await page.goto(URI, {
     timeout: 90000
   })
-  for(let o=0; o<100; o++) opacity(o)
+  setTimeout( ()=> opacity(100), 1000)
 })();
