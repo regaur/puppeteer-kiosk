@@ -1,6 +1,6 @@
 # Maintainer: Jan Boelsche <jan@lagomorph.de>
 pkgname=puppeteer-kiosk
-pkgver=1.6
+pkgver=1.7
 pkgrel=1
 pkgdesc="Launch compiz and puppeteer in auto-login session"
 arch=('x86_64')
