@@ -6,5 +6,6 @@ bg=/usr/share/backgrounds/loading.png
 compiz dbus obs regex png --bg-image "${bg}" 2>&1 >/home/auto-login/compiz.log &
 sleep 1
 
-puppeteer-kiosk 'https://nullprogram.com/webgl-particles/'
+default_kiosk_url='https://nullprogram.com/webgl-particles/'
+puppeteer-kiosk "${kiosk_url:-${default_kiosk_url}}"
 
