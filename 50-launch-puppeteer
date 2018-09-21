@@ -2,6 +2,10 @@ echo -e "export DBUS_SESSION_BUS_ADDRESS=${DBUS_SESSION_BUS_ADDRESS}\nexport DIS
 #xdpyinfo
 #glxinfo
 
+# Turn of screen blanking
+# https://wiki.archlinux.org/index.php/Display_Power_Management_Signaling
+xset s off -dpms
+
 bg=/usr/share/backgrounds/loading.png
 compiz dbus obs regex png --bg-image "${bg}" 2>&1 >/home/auto-login/compiz.log &
 sleep 1
