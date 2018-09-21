@@ -1,6 +1,6 @@
 # Maintainer: Jan Boelsche <jan@lagomorph.de>
 pkgname=puppeteer-kiosk
-pkgver=1.10
+pkgver=1.11
 pkgrel=1
 pkgdesc="Launch compiz and puppeteer in auto-login session"
 arch=('x86_64')
@@ -26,7 +26,7 @@ source=(
 )
 
 sha256sums=('a727e7061fde6b4a2501327a9e5a0d06a3e9948c355bb5eb9aa2dcfd0babad89'
-            'dbcfe3f2bb752de179caaf7a62f29400416939b9e86d2079f3757ee48c8b5b04'
+            'e2b0a5e56785ddbaaa63bf166a4f7530d48bb2b0a6c4123adbc3f6cfe4b898fb'
             '0e748649b9856b88a7b874ba08d62bff59ce75bb37393d4c895a845ee815fdb0')
 
 package () {

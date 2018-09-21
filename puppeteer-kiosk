@@ -23,10 +23,11 @@ const URI = process.argv[2] || 'about:blank'
   opacity(0) // hide browser window as chromium flickers into existence
 
   const browser = await puppeteer.launch({
-	  timeout: 90000,
-	  args,
-	  headless: false,
-	  ignoreDefaultArgs: ['--mute-audio'],
+    timeout: 90000,
+    args,
+    headless: false,
+    ignoreDefaultArgs: ['--mute-audio'],
+    userDataDir: process.env.HOME + '/.config/chromium',
 	  defaultViewport: {
       width: 1920,
       height: 1080,
