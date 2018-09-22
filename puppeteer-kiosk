@@ -1,6 +1,9 @@
 #!/usr/bin/node
+
+const userDataDir = process.env.HOME + '/.config/chromium'
+
 const puppeteer = require('puppeteer')
-const opacity = require('../opacity')
+const opacity = require('../opacity')({userDataDir})
 
 const blackBody = "data:text/html;charset=utf-8;base64,PGJvZHkgc3R5bGU9ImJhY2tncm91bmQ6IGJsYWNrOyI+PC9ib2R5Pg=="
 
@@ -27,8 +30,8 @@ const URI = process.argv[2] || 'about:blank'
     args,
     headless: false,
     ignoreDefaultArgs: ['--mute-audio'],
-    userDataDir: process.env.HOME + '/.config/chromium',
-	  defaultViewport: {
+    userDataDir,
+    defaultViewport: {
       width: 1920,
       height: 1080,
       hasTouch: true

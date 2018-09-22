@@ -10,7 +10,10 @@ function throwOnFail(err, result) {
 }
 
 function callMethod(method, obj, arg, cb) {
-  if (typeof arg == 'function') cb=arg, arg=undefined
+  if (typeof arg == 'function') {
+    cb=arg
+    arg=undefined
+  }
 
   const args = [
     '--print-reply',
@@ -33,14 +36,18 @@ function setArray(key, type, values) {
   callMethod('set', key, `array:${type}:${values.join(':')}`, throwOnFail)
 }
 
-setArray(
-  'obs/screen0/opacity_matches', 
-  'string',
-  ['name=chromium-browser.*puppeteer_dev_profile.*']
-)
+module.exports = function(opts) {
+  opts = opts || {}
+  const userDataDir = opts.userDataDir || 'puppeteer_dev_profile'
 
-function setOpacity(opacity) {
-  setArray('obs/screen0/opacity_values', 'int32', [opacity])
+  setArray(
+    'obs/screen0/opacity_matches', 
+    'string',
+    [`name=chromium-browser (${userDataDir})`]
+  )
+
+  return function setOpacity(opacity) {
+    setArray('obs/screen0/opacity_values', 'int32', [opacity])
+  }
 }
 
-module.exports=setOpacity
