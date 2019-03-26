@@ -9,12 +9,16 @@ const blackBody = "data:text/html;charset=utf-8;base64,PGJvZHkgc3R5bGU9ImJhY2tnc
 
 const URI = process.argv[2] || 'about:blank'
 
+const DEVTOOLS = 0
+
 ;(async () => {
   const args=[
     '--no-default-browser-check',
     '--no-first-run',
     '--autoplay-policy=no-user-gesture-required',
-    '--kiosk',
+    DEVTOOLS ? 
+      '--auto-open-devtools-for-tabs'
+      : '--kiosk',
     '--disable-pinch',
     '--overscroll-history-navigation=0',
     '--noerrdialogs',
@@ -33,9 +37,17 @@ const URI = process.argv[2] || 'about:blank'
     headless: false,
     ignoreDefaultArgs: ['--mute-audio'],
     userDataDir,
+    devtools: true,
     defaultViewport: {
+      // TODO: this works for
+      // - a 1920x1080 screen
+      // - same but roated
+      // - two 1920x1080 on top of each other
+      // ..but: it realy wants be a cli argument
+      // or a service that restarts the browser when a differnt
+      // resolution is requested.
       width: 1920,
-      height: 1080,
+      height: 1920*2,
       hasTouch: true
     }
   })
@@ -43,5 +55,6 @@ const URI = process.argv[2] || 'about:blank'
   await page.goto(URI, {
     timeout: 90000
   })
+  page.bringToFront()
   setTimeout( ()=> opacity(100), 1000)
 })();
