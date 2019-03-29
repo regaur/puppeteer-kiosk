@@ -16,9 +16,13 @@ const DEVTOOLS = 0
     '--no-default-browser-check',
     '--no-first-run',
     '--autoplay-policy=no-user-gesture-required',
+    '--disable-gesture-requirement-for-media-playback',
+    '--use-fake-ui-for-media-stream',
+
     DEVTOOLS ? 
       '--auto-open-devtools-for-tabs'
       : '--kiosk',
+
     '--disable-pinch',
     '--overscroll-history-navigation=0',
     '--noerrdialogs',
