@@ -1,0 +1,26 @@
+[Unit]
+Description=Puppeteer
+PartOf=graphical-session.target
+Requires=kiosk-compiz.service
+After=kiosk-compiz.service
+
+
+[Service]
+
+# Turn of screen blanking
+# https://wiki.archlinux.org/index.php/Display_Power_Management_Signaling
+ExecStartPre=xset s off -dpms
+
+# Get Url from tre-boot
+ExecStartPre=bash -xec "node -e \"console.log($$(sudo -u %i ssb_appname=%i sbot tre-boot.url))\" > %t/tre-boot-url"
+
+# Get viewport size from compiz
+ExecStartPre=bash -xec "compiz-get-output-size" > %t/compiz-output-size"
+
+
+ExecStart=bash -xec "source %t/compiz-output-size && puppeteer-kisok $$(cat %t/tre-boot-url) --vw $${vw} --vh $${vh}"
+RestartSec=5
+Restart=always
+
+[Install]
+WantedBy=default.target
