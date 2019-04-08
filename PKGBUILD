@@ -1,6 +1,6 @@
 # Maintainer: Jan Boelsche <jan@lagomorph.de>
 pkgname=puppeteer-kiosk
-pkgver=1.16.0
+pkgver=1.17.0
 pkgrel=1
 pkgdesc="Launch puppeteer in auto-login session"
 arch=('x86_64')
