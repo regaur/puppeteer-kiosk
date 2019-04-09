@@ -22,5 +22,7 @@ ExecStart=bash -xec "source %t/compiz-output-size && puppeteer-kiosk $$(cat %t/t
 RestartSec=5
 Restart=always
 
+ExecStop=xdotool search --name Chromium getwindowname key "alt+F4"
+
 [Install]
 WantedBy=default.target
