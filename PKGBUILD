@@ -24,7 +24,7 @@ source=(
   'puppeteer-kiosk@.service'
 )
 
-sha256sums=('59cd0b2e6a3326e299290a8b6500f449a7d660c6960f97bc929b80daffbc4625')
+sha256sums=('aae3fae2a7fcd686681de52a9e59cdd8cf112920d7916817f43f1c80419da98c')
 
 pkgver () {
   npm view ${pkgname}@latest version
