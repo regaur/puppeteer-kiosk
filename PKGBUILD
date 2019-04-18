@@ -1,6 +1,6 @@
 # Maintainer: Jan Boelsche <jan@lagomorph.de>
 pkgname=puppeteer-kiosk
-pkgver=2.4.0
+pkgver=2.5.0
 pkgrel=1
 pkgdesc="Launch puppeteer in auto-login session"
 arch=('x86_64')
@@ -9,6 +9,7 @@ groups=()
 
 depends=(
   'puppeteer'
+  'imagemagick'
   'lightdm-autologin>=2.7'
   'compiz-user-service'
   'xdotool'
@@ -24,7 +25,7 @@ source=(
   'puppeteer-kiosk@.service'
 )
 
-sha256sums=('aae3fae2a7fcd686681de52a9e59cdd8cf112920d7916817f43f1c80419da98c')
+sha256sums=('f0c11da12b0e3b00c0bd51d4b8e2c11d440f7f28be66680bc572c6a01f75cdeb')
 
 pkgver () {
   npm view ${pkgname}@latest version

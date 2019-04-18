@@ -1,9 +1,0 @@
-#xdpyinfo
-#glxinfo
-
-# Turn of screen blanking
-# https://wiki.archlinux.org/index.php/Display_Power_Management_Signaling
-xset s off -dpms
-default_kiosk_url='https://nullprogram.com/webgl-particles/'
-puppeteer-kiosk "${kiosk_url:-${default_kiosk_url}}"
-
