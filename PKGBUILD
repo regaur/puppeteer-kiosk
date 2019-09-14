@@ -1,6 +1,6 @@
 # Maintainer: Jan Boelsche <jan@lagomorph.de>
 pkgname=puppeteer-kiosk
-pkgver=2.12.0
+pkgver=2.14.0
 pkgrel=1
 pkgdesc="Launch puppeteer in auto-login session"
 arch=('x86_64')
@@ -25,7 +25,7 @@ source=(
   'puppeteer-kiosk@.service'
 )
 
-sha256sums=('f0c11da12b0e3b00c0bd51d4b8e2c11d440f7f28be66680bc572c6a01f75cdeb')
+sha256sums=('cbc330e3aad875a367bebc94378f3582ac33aec9368ff7b46b63a2a925c7faf0')
 
 pkgver () {
   npm view ${pkgname}@latest version

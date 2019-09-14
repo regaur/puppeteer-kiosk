@@ -17,7 +17,6 @@ ExecStartPre=bash -xec "node -e \"console.log($$(sudo -u %i ssb_appname=%i sbot 
 # Get viewport size from compiz
 ExecStartPre=bash -xec "compiz-get-output-size > %t/compiz-output-size"
 
-
 ExecStart=bash -xec "source %t/compiz-output-size; exec puppeteer-kiosk $$(cat %t/tre-boot-url) --vw $${vw} --vh $${vh} --hide-until-loaded --screenshot-port=9090"
 RestartSec=5
 Restart=always
@@ -25,6 +24,10 @@ Restart=always
 ExecStop=bash -c "[[ -n $MAINPID ]] && kill -s SIGTERM $MAINPID && tail --pid=$MAINPID -f /dev/null"
 TimoutStopSec=15
 ExecReload=xdotool search --name Chromium getwindowname key "ctrl+r"
+
+# puppeteer-kiosk has native journald support
+StandardOutput=null
+StandardError=journal
 
 [Install]
 WantedBy=default.target
